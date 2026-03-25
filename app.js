@@ -156,11 +156,8 @@ async function createJournal() {
   const name = ui.newJournalName.value.trim() || 'Field Journal';
   const code = inviteCode();
 
-  const { data: journal, error: journalError } = await supabase
-    .from('journals')
-    .insert({ name, invite_code: code, created_by: currentUser.id })
-    .select()
-    .single();
+  const { data: journal, error } = await supabase
+  .rpc('join_journal_by_code', { code });
 
   if (journalError) {
     setStatus(ui.journalMessage, journalError.message, true);
