@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Field Journal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">PRIVATE DIGITAL FIELD JOURNAL</p>
+        <h1>Body Notes Log</h1>
+        <p class="subhead">Track patterns over time across two devices, quietly and securely.</p>
+      </div>
+      <button id="logoutBtn" class="ghost-button hidden">Sign out</button>
+    </header>
+
+    <main>
+      <section id="authCard" class="card auth-card">
+        <div class="field-stamp">ACCESS CAMP</div>
+        <h2>Sign in or create access</h2>
+        <p class="muted">Use email + password. After sign-in, one of you can create a journal and share the join code with the other.</p>
+
+        <div class="grid two-up">
+          <label>
+            <span>Email</span>
+            <input id="emailInput" type="email" placeholder="you@example.com" autocomplete="email" />
+          </label>
+          <label>
+            <span>Password</span>
+            <input id="passwordInput" type="password" placeholder="••••••••" autocomplete="current-password" />
+          </label>
+        </div>
+
+        <div class="button-row wrap">
+          <button id="signInBtn">Sign in</button>
+          <button id="signUpBtn" class="secondary">Create account</button>
+          <button id="magicLinkBtn" class="ghost-button">Email magic link</button>
+        </div>
+
+        <p id="authMessage" class="status"></p>
+      </section>
+
+      <section id="journalCard" class="card hidden">
+        <div class="field-stamp">JOURNAL LINK</div>
+        <h2>Connect to a shared journal</h2>
+        <div class="grid two-up">
+          <div class="card inset">
+            <h3>Create a new journal</h3>
+            <label>
+              <span>Journal name</span>
+              <input id="newJournalName" type="text" placeholder="Spring field notes" />
+            </label>
+            <button id="createJournalBtn">Create journal</button>
+          </div>
+          <div class="card inset">
+            <h3>Join an existing journal</h3>
+            <label>
+              <span>Invite code</span>
+              <input id="joinCodeInput" type="text" placeholder="ABC123" maxlength="12" />
+            </label>
+            <button id="joinJournalBtn" class="secondary">Join with code</button>
+          </div>
+        </div>
+        <p id="journalMessage" class="status"></p>
+      </section>
+
+      <section id="appSection" class="hidden">
+        <section class="card hero-card">
+          <div>
+            <p class="eyebrow">ACTIVE JOURNAL</p>
+            <h2 id="journalTitle">Field Journal</h2>
+            <p class="muted">Invite code: <strong id="journalCode">-</strong></p>
+          </div>
+          <div class="hero-actions">
+            <button id="refreshBtn" class="ghost-button">Refresh</button>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="field-stamp">NEW ENTRY</div>
+          <h2>Add a field note</h2>
+          <form id="entryForm">
+            <div class="grid three-up">
+              <label>
+                <span>Date</span>
+                <input id="entryDate" type="date" required />
+              </label>
+              <label>
+                <span>Weight</span>
+                <input id="weight" type="number" step="0.1" min="0" placeholder="lbs" />
+              </label>
+              <label>
+                <span>Water intake</span>
+                <input id="waterIntake" type="number" step="0.1" min="0" placeholder="cups or liters" />
+              </label>
+              <label>
+                <span>Hips</span>
+                <input id="hips" type="number" step="0.1" min="0" placeholder="inches" />
+              </label>
+              <label>
+                <span>Tummy</span>
+                <input id="tummy" type="number" step="0.1" min="0" placeholder="inches" />
+              </label>
+              <label>
+                <span>Under bust</span>
+                <input id="underBust" type="number" step="0.1" min="0" placeholder="inches" />
+              </label>
+              <label>
+                <span>Tummy sucking-in count</span>
+                <input id="tummySuckingCount" type="number" step="1" min="0" placeholder="0" />
+              </label>
+              <label>
+                <span>Observed or reported?</span>
+                <select id="suckingType">
+                  <option value="">Select one</option>
+                  <option value="observed">Observed</option>
+                  <option value="reported">Reported</option>
+                  <option value="both">Both</option>
+                </select>
+              </label>
+              <label>
+                <span>Recorded by</span>
+                <input id="recordedBy" type="text" placeholder="Initials or name" />
+              </label>
+            </div>
+            <label>
+              <span>Notes / observations</span>
+              <textarea id="notes" rows="5" placeholder="Mood, body feelings, context, meals, patterns, anything worth noting..."></textarea>
+            </label>
+            <div class="button-row">
+              <button type="submit">Save entry</button>
+            </div>
+          </form>
+          <p id="entryMessage" class="status"></p>
+        </section>
+
+        <section class="card">
+          <div class="field-stamp">TIMELINE</div>
+          <div class="section-head">
+            <div>
+              <h2>Entries</h2>
+              <p class="muted">Newest at the top. Each entry is shared between journal members.</p>
+            </div>
+          </div>
+          <div id="entriesList" class="entries-list"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
